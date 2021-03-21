@@ -13,7 +13,7 @@ public class InventoryDriver {
 		System.out.println("Enter your choice");
 		int ch = sc.nextInt();
 		Department deptManager = new DepartmentManager();
-		while (ch < 2) {
+		while (ch < 4) {
 			switch (ch) {
 
 			case 1:
@@ -22,6 +22,8 @@ public class InventoryDriver {
 				System.out.println("Enter 2 to fetch from db");
 				System.out.println("Enter 3 to delete from db");
 				int i = in.nextInt();
+				
+				while(i<4) {
 				switch (i) {
 
 				case 1:
@@ -47,6 +49,8 @@ public class InventoryDriver {
 
 				default:
 					System.out.println("Invalid choice");
+				}
+				break;
 				}
 			}
 			break;

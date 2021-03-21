@@ -11,7 +11,7 @@ import com.saartha.interfaces.Department;
 
 public class DepartmentManager implements Department {
 
-	 Scanner sc = new Scanner(System.in);
+	Scanner sc = new Scanner(System.in);
 	private PreparedStatement pstmt;
 	private PreparedStatement pstmt0;
 
@@ -20,7 +20,7 @@ public class DepartmentManager implements Department {
 
 		DepartmentBean deptBean = new DepartmentBean(deptId, deptName, college, deptHodId, hodName, pwd);
 		String s = "insert into dept values(?,?,?,?,?,?)";
-		
+
 		try {
 			Connection connectionProvider = ConnectionProvider.getConnectionProvider();
 			int dId = deptBean.getDeptId();
@@ -29,7 +29,7 @@ public class DepartmentManager implements Department {
 			int deptHoDId = deptBean.getDeptHodId();
 			String hoDName = deptBean.getHodName();
 			String pass = deptBean.getPwd();
-			
+
 			int clId = 0;
 			System.out.println("enter the college name");
 			String cName = sc.next();
@@ -37,24 +37,23 @@ public class DepartmentManager implements Department {
 			String s1 = "select clgId from college where clgName=?";
 			System.out.println(connectionProvider);
 			pstmt0 = connectionProvider.prepareStatement(s1);
-			
+
 			pstmt0.setString(1, cName);
 			ResultSet rs1 = pstmt0.executeQuery();
-			
+
 			while (rs1.next()) {
 				clId = rs1.getInt(1);
 				System.out.println(clId);
 			}
-				pstmt = connectionProvider.prepareStatement(s);
-				pstmt.setInt(1, dId);
-				pstmt.setString(2, dName);
-				pstmt.setInt(3, clId);
-				pstmt.setInt(4, deptHoDId);
-				pstmt.setString(5, hoDName);
-				pstmt.setString(6, pass);
-				pstmt.executeUpdate();
-				System.out.println("Updated Successfully");
-			
+			pstmt = connectionProvider.prepareStatement(s);
+			pstmt.setInt(1, dId);
+			pstmt.setString(2, dName);
+			pstmt.setInt(3, clId);
+			pstmt.setInt(4, deptHoDId);
+			pstmt.setString(5, hoDName);
+			pstmt.setString(6, pass);
+			pstmt.executeUpdate();
+			System.out.println("Updated Successfully");
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -64,32 +63,30 @@ public class DepartmentManager implements Department {
 
 	private PreparedStatement pstmt1;
 
-	@Override 
+	@Override
 	public void fetchDept() {
 		Connection connectionProvider = ConnectionProvider.getConnectionProvider();
 		System.out.println(connectionProvider);
-		
-		
-		String s = "select * from dept where clgId=? ";
-		
+
+		String s = "select * from dept ";
+		System.out.println("enter the college name");
 		try {
-			
+
 			int clId = 0;
-			System.out.println("enter the college name");
+
 			String cName = sc.next();
 			System.out.println(cName);
 			String s1 = "select clgId from college where clgName=?";
-			System.out.println(connectionProvider);
 			pstmt0 = connectionProvider.prepareStatement(s1);
-			
+
 			pstmt0.setString(1, cName);
 			ResultSet rs1 = pstmt0.executeQuery();
-			
+
 			while (rs1.next()) {
 				clId = rs1.getInt(1);
 				System.out.println(clId);
 			}
-			
+
 			pstmt1 = connectionProvider.prepareStatement(s);
 			ResultSet rs = pstmt1.executeQuery();
 			if (rs.next()) {
@@ -111,28 +108,15 @@ public class DepartmentManager implements Department {
 	@Override
 	public void deleteDept() {
 
-		String s = "delete from dept where deptId=10";
+		String s = "delete from dept where col=?";
 		Connection connectionProvider = ConnectionProvider.getConnectionProvider();
 		System.out.println(connectionProvider);
 		try {
-			
-			int clId = 0;
-			System.out.println("enter the college name");
-			String cName = sc.next();
-			System.out.println(cName);
-			String s1 = "select clgId from college where clgName=?";
-			System.out.println(connectionProvider);
-			pstmt0 = connectionProvider.prepareStatement(s1);
-			
-			pstmt0.setString(1, cName);
-			ResultSet rs1 = pstmt0.executeQuery();
-			
-			while (rs1.next()) {
-				clId = rs1.getInt(1);
-				System.out.println(clId);
-			}
-			
+			System.out.println("enter the college id");
+			int clId = sc.nextInt();
+
 			pstmt2 = connectionProvider.prepareStatement(s);
+			pstmt2.setInt(1, clId);
 			pstmt2.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
