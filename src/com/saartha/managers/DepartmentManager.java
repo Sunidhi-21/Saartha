@@ -10,46 +10,51 @@ import com.saartha.beans.DepartmentBean;
 import com.saartha.interfaces.Department;
 
 public class DepartmentManager implements Department {
-	
-	private static Scanner sc=new Scanner(System.in);
+
+	 Scanner sc = new Scanner(System.in);
 	private PreparedStatement pstmt;
 	private PreparedStatement pstmt0;
+
 	@Override
 	public void saveDept(int deptId, String deptName, int college, int deptHodId, String hodName, String pwd) {
 
 		DepartmentBean deptBean = new DepartmentBean(deptId, deptName, college, deptHodId, hodName, pwd);
 		String s = "insert into dept values(?,?,?,?,?,?)";
-		String s1= "select clgId from college where clgName='sce'";
+		
 		try {
-			
+			Connection connectionProvider = ConnectionProvider.getConnectionProvider();
 			int dId = deptBean.getDeptId();
 			String dName = deptBean.getDeptName();
-			int clg = deptBean.getCollege();
+			// int clg = deptBean.getCollege();
 			int deptHoDId = deptBean.getDeptHodId();
 			String hoDName = deptBean.getHodName();
 			String pass = deptBean.getPwd();
-
 			
-			Connection connectionProvider = ConnectionProvider.getConnectionProvider();
+			int clId = 0;
+			System.out.println("enter the college name");
+			String cName = sc.next();
+			System.out.println(cName);
+			String s1 = "select clgId from college where clgName=?";
 			System.out.println(connectionProvider);
-			//System.out.println("enter the college name");
-			//String cName=sc.next();
 			pstmt0 = connectionProvider.prepareStatement(s1);
-			ResultSet rs = pstmt0.executeQuery();
-			int clg1=0;
-			if (rs.next()) {
-				clg1=rs.getInt(1);
-				System.out.println(clg1);
-				}
-			pstmt = connectionProvider.prepareStatement(s);
-			pstmt.setInt(1, dId);
-			pstmt.setString(2, dName);
-			pstmt.setInt(3, clg1);
-			pstmt.setInt(4, deptHoDId);
-			pstmt.setString(5, hoDName);
-			pstmt.setString(6, pass);
-			pstmt.executeUpdate();
-			System.out.println("Updated Successfully");
+			
+			pstmt0.setString(1, cName);
+			ResultSet rs1 = pstmt0.executeQuery();
+			
+			while (rs1.next()) {
+				clId = rs1.getInt(1);
+				System.out.println(clId);
+			}
+				pstmt = connectionProvider.prepareStatement(s);
+				pstmt.setInt(1, dId);
+				pstmt.setString(2, dName);
+				pstmt.setInt(3, clId);
+				pstmt.setInt(4, deptHoDId);
+				pstmt.setString(5, hoDName);
+				pstmt.setString(6, pass);
+				pstmt.executeUpdate();
+				System.out.println("Updated Successfully");
+			
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -59,13 +64,32 @@ public class DepartmentManager implements Department {
 
 	private PreparedStatement pstmt1;
 
-	@Override
+	@Override 
 	public void fetchDept() {
-
-		String s = "select * from dept ";
 		Connection connectionProvider = ConnectionProvider.getConnectionProvider();
 		System.out.println(connectionProvider);
+		
+		
+		String s = "select * from dept where clgId=? ";
+		
 		try {
+			
+			int clId = 0;
+			System.out.println("enter the college name");
+			String cName = sc.next();
+			System.out.println(cName);
+			String s1 = "select clgId from college where clgName=?";
+			System.out.println(connectionProvider);
+			pstmt0 = connectionProvider.prepareStatement(s1);
+			
+			pstmt0.setString(1, cName);
+			ResultSet rs1 = pstmt0.executeQuery();
+			
+			while (rs1.next()) {
+				clId = rs1.getInt(1);
+				System.out.println(clId);
+			}
+			
 			pstmt1 = connectionProvider.prepareStatement(s);
 			ResultSet rs = pstmt1.executeQuery();
 			if (rs.next()) {
@@ -91,6 +115,23 @@ public class DepartmentManager implements Department {
 		Connection connectionProvider = ConnectionProvider.getConnectionProvider();
 		System.out.println(connectionProvider);
 		try {
+			
+			int clId = 0;
+			System.out.println("enter the college name");
+			String cName = sc.next();
+			System.out.println(cName);
+			String s1 = "select clgId from college where clgName=?";
+			System.out.println(connectionProvider);
+			pstmt0 = connectionProvider.prepareStatement(s1);
+			
+			pstmt0.setString(1, cName);
+			ResultSet rs1 = pstmt0.executeQuery();
+			
+			while (rs1.next()) {
+				clId = rs1.getInt(1);
+				System.out.println(clId);
+			}
+			
 			pstmt2 = connectionProvider.prepareStatement(s);
 			pstmt2.executeUpdate();
 		} catch (SQLException e) {
