@@ -1,0 +1,170 @@
+
+
+.transLayer1{
+    position: absolute;
+    z-index: 1;
+    top: -300px;
+    left: 40%;
+    transform: rotate(60deg);
+    opacity: .2;
+    width: 100%;
+    height: 150vh;
+    background-color: black;
+}
+
+.transLayer2{
+    position: absolute;
+    z-index: 2;
+    top: -300px;
+    left: 35%;
+    transform: rotate(65deg);
+    opacity: .2;
+    width: 100%;
+    height: 150vh;
+    background-color: black;
+
+}
+.heading-div{
+    position: absolute;
+    left: 50%;
+    z-index: 3;
+    transform: translateX(-50%);
+}
+
+.heading{
+    margin: 30px;
+    top: 300px;
+    color: white;
+    font-size: 46px;
+    
+}
+
+.login-box{
+  
+    position: absolute;
+    display: flex;
+    align-items: center;
+    top: 250px;
+    left: 200px;
+    height: 308px;
+    width: 394px;
+    background-color: white;
+    border-radius: 33px;
+    opacity: .3;
+    box-shadow: 10px 5px 10px #000;
+}
+
+.login-box-content{
+    position: absolute;
+    display: flex;
+    align-items: center;
+    top: 100px;
+    left: 200px;
+    height: 308px;
+    width: 394px;
+    
+}
+.login-label{
+    font-size: 25px;
+    font-weight: bold;
+    color: white;
+}
+.input{
+    width: 260px;
+    padding: 18px 30px;
+    border: none;
+
+    border-radius: 30px;
+}
+.input:focus{
+    outline: none;
+}
+.login-btn{
+    width: 320px;
+    padding: 18px 30px;
+    background-color: #3A55D9;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 15px;
+    border: none;
+}
+.login-btn:hover{
+    width: 320px;
+    padding: 18px 30px;
+    background-color: #0721a1;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 15px;
+    border: none;
+}
+.input-div{
+    position: absolute;
+    left: 50%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    box-sizing: border-box;
+    transform: translateX(-50%);
+
+}
+
+/* login End */
+
+
+/* png start */
+
+.png1{
+    position: absolute;
+    bottom: 50px;
+    left: 150px;
+
+}
+.img-png1{
+    width: 400px;
+}
+.png2{
+    position: absolute;
+    bottom: 50px;
+    left: 550px;
+}
+.img-png2{
+    width: 600px;
+}
+/* png end */
+
+/* contentc start */
+.content-div{
+    position: absolute;
+    top: 150px;
+    right: 150px;
+    height: 650px;
+    width: 600px;
+    background-color: white;
+    border-radius: 33px;
+    opacity: .3;
+    box-shadow: 10px 5px 10px #000;
+}
+
+.content-div-list{
+    position: absolute;
+    z-index: 11;
+    top: 150px;
+    right: 150px;
+    height: 650px;
+    width: 600px;
+
+}
+.content-div-list ul li{
+    z-index: 10;
+    color: white;
+}
+
+.content-ul{
+    margin: 40px;
+}
+.content-text{
+    font-weight: bold;
+}
+/* content End */
